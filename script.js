@@ -1,19 +1,15 @@
-
-'use strict';
+"use strict";
 
 let bookList = [];
 
-
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   getAll().then((apiBooks) => (bookList = apiBooks));
 });
 
-
 searchField.addEventListener(
-  'keyup',
+  "keyup",
 
   (e) =>
-    
     renderBookList(
       bookList.filter(({ title, author }) => {
         const searchTerm = e.target.value.toLowerCase();
@@ -21,19 +17,17 @@ searchField.addEventListener(
           title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           author.toLowerCase().includes(searchTerm.toLowerCase())
         );
-      }) 
-    ) 
+      })
+    )
 );
 
 function renderBookList(bookList) {
-  
-  const existingElement = document.querySelector('.book-list');
-  const root = document.getElementById('root');
+  const existingElement = document.querySelector(".book-list");
+  const root = document.getElementById("root");
 
   existingElement && root.removeChild(existingElement);
 
   bookList.length > 0 &&
     searchField.value &&
-    
-    root.insertAdjacentHTML('beforeend', BookList(bookList));
+    root.insertAdjacentHTML("beforeend", BookList(bookList));
 }
